@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/lazy11233/gulu/issues"
   },
-  "homepage": "https://github.com/lazy11233/gulu#readme"
+  "homepage": "https://github.com/lazy11233/gulu#readme",
+  "dependencies": {
+    "vue": "^2.5.17"
+  }
 }
