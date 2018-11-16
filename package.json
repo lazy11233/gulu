@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lazy11233/gulu.git"
+    "url": "git+https://gith ub.com/lazy11233/gulu.git"
   },
   "keywords": [
     "vue",
@@ -27,8 +27,15 @@
   "devDependencies": {
     "@vue/component-compiler-utils": "^2.3.0",
     "chai": "^4.2.0",
+    "karma-chai-spies": "^0.1.4",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-mocha": "^1.3.0",
+    "karma-sinon-chai": "^2.0.2",
+    "mocha": "^5.2.0",
     "parcel-bundler": "^1.10.3",
     "sass": "^1.14.3",
+    "sinon": "^7.1.1",
+    "sinon-chai": "^3.2.0",
     "vue-template-compiler": "^2.5.17"
   },
   "alias": {
