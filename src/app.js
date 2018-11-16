@@ -9,6 +9,9 @@ Vue.component('g-icon', Icon);
 
 const app = new Vue({
   el: '#app',
+  data: {
+    loading1: false
+  }
 });
 {
   const expert = chai.expect;
