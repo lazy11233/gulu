@@ -10,37 +10,48 @@
 </template>
 <script>
 export default {
-  name: 'popover',
+  name: "popover",
   data() {
     return {
-      visible: false,
-    }
+      visible: false
+    };
   },
   methods: {
     handleClick(event) {
-      if(this.$refs.triggerWrapper.contains(event.target)) {
-        console.log("下面");
-        this.visible = !this.visible  
-        if(this.visible) {
+      if (this.$refs.triggerWrapper.contains(event.target)) {
+        this.visible = !this.visible;
+        if (this.visible) {
           // 点开了popover，即点击到按钮
-          document.body.appendChild(this.$refs.contentWrapper)
-          let {width, height, left, top} = this.$refs.triggerWrapper.getBoundingClientRect()
-          this.$refs.contentWrapper.style.top = top + window.scrollY + 'px'
-          this.$refs.contentWrapper.style.left = left + window.scrollX + 'px'
-
-          let eventHandler = (e) => {
-            this.visible = false
-            document.removeEventListener('click', eventHandler)
-          }
-          document.addEventListener('click', eventHandler)
-
+          this.onShow();
         }
-      }else {
-        console.log('上面');
       }
+    },
+    positionContent() {
+      document.body.appendChild(this.$refs.contentWrapper);
+      let {
+        width,
+        height,
+        left,
+        top
+      } = this.$refs.triggerWrapper.getBoundingClientRect();
+      this.$refs.contentWrapper.style.top = top + window.scrollY + "px";
+      this.$refs.contentWrapper.style.left = left + window.scrollX + "px";
+    },
+    listToDocument() {
+      let eventHandler = e => {
+        if (!this.$refs.contentWrapper.contains(e.target)) {
+          this.visible = false;
+          document.removeEventListener("click", eventHandler);
+        }
+      };
+      document.addEventListener("click", eventHandler);
+    },
+    onShow() {
+      this.positionContent();
+      this.listToDocument();
     }
   }
-}
+};
 </script>
 <style scoped lang="scss">
 .popover {
@@ -51,7 +62,7 @@ export default {
 .content-wraper {
   position: absolute;
   border: 1px solid #bfa;
-  box-shadow: 0 0 3PX rgba(0, 0, 0, .5);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
   transform: translateY(-100%);
 }
 </style>
