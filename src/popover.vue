@@ -17,28 +17,28 @@ export default {
     }
   },
   methods: {
-    handleClick() {
-      const self = this
-      self.visible = !self.visible
-      if(self.visible) {
-        document.body.appendChild(self.$refs.contentWrapper)
-        let {width, height, left, top} = this.$refs.triggerWrapper.getBoundingClientRect()
-        console.log(width, height, left, top)
-        self.$refs.contentWrapper.style.top = top + window.scrollY + 'px'
-        self.$refs.contentWrapper.style.left = left + window.scrollX+ 'px'
-        self.$nextTick(() => {
-          let clickHandler = () => {
-            self.visible = !this.visible
-            document.removeEventListener('click', clickHandler)
+    handleClick(event) {
+      if(this.$refs.triggerWrapper.contains(event.target)) {
+        console.log("下面");
+        this.visible = !this.visible  
+        if(this.visible) {
+          // 点开了popover，即点击到按钮
+          document.body.appendChild(this.$refs.contentWrapper)
+          let {width, height, left, top} = this.$refs.triggerWrapper.getBoundingClientRect()
+          this.$refs.contentWrapper.style.top = top + window.scrollY + 'px'
+          this.$refs.contentWrapper.style.left = left + window.scrollX + 'px'
+
+          let eventHandler = (e) => {
+            this.visible = false
+            document.removeEventListener('click', eventHandler)
           }
-          document.addEventListener('click', clickHandler)
-        })
+          document.addEventListener('click', eventHandler)
+
+        }
+      }else {
+        console.log('上面');
       }
     }
-  },
-  mounted(){
-    console.log(this.$refs.contentWrapper)
-    console.log(this.$refs.triggerWrapper)
   }
 }
 </script>
