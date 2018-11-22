@@ -1,6 +1,6 @@
 <template>
   <div class="popover" @click.stop="handleClick">
-    <div class="content-wraper" v-if="visible" @click.stop>
+    <div ref="contentWraper" class="content-wraper" v-if="visible" @click.stop>
       <slot name="content"></slot>
     </div>
     <slot></slot>
@@ -18,13 +18,8 @@ export default {
     handleClick() {
       const self = this
       self.visible = !self.visible
-      console.log('切换visible')
-
       if(self.visible) {
-        console.log('新增监听');
-        
         self.$nextTick(() => {
-          console.log('删除监听器');
           let clickHandler = () => {
             self.visible = !this.visible
             document.removeEventListener('click', clickHandler)
