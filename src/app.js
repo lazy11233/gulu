@@ -2,10 +2,11 @@ import Vue from 'vue';
 import chai from 'chai';
 import Button from './button.vue';
 import Icon from './icon.vue';
-
+import Popover from './popover.vue'
 
 Vue.component('g-button', Button);
 Vue.component('g-icon', Icon);
+Vue.component('g-popover', Popover)
 
 const app = new Vue({
   el: '#app',
