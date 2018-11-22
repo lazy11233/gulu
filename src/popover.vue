@@ -1,9 +1,11 @@
 <template>
   <div class="popover" @click.stop="handleClick">
-    <div ref="contentWraper" class="content-wraper" v-if="visible" @click.stop>
+    <div ref="contentWrapper" class="content-wraper" v-show="visible" @click.stop>
       <slot name="content"></slot>
     </div>
-    <slot></slot>
+    <div ref="triggerWrapper">
+      <slot></slot>
+    </div>
   </div>
 </template>
 <script>
@@ -19,6 +21,11 @@ export default {
       const self = this
       self.visible = !self.visible
       if(self.visible) {
+        document.body.appendChild(self.$refs.contentWrapper)
+        let {width, height, left, top} = this.$refs.triggerWrapper.getBoundingClientRect()
+        console.log(width, height, left, top)
+        self.$refs.contentWrapper.style.top = top + window.scrollY + 'px'
+        self.$refs.contentWrapper.style.left = left + window.scrollX+ 'px'
         self.$nextTick(() => {
           let clickHandler = () => {
             self.visible = !this.visible
@@ -28,6 +35,10 @@ export default {
         })
       }
     }
+  },
+  mounted(){
+    console.log(this.$refs.contentWrapper)
+    console.log(this.$refs.triggerWrapper)
   }
 }
 </script>
@@ -36,12 +47,11 @@ export default {
   display: inline-block;
   position: relative;
   vertical-align: top;
-  .content-wraper {
-    position: absolute;
-    left: 0;
-    bottom: 100%;
-    border: 1px solid #bfa;
-    box-shadow: 0 0 3PX rgba(0, 0, 0, .5);
-  }
+}
+.content-wraper {
+  position: absolute;
+  border: 1px solid #bfa;
+  box-shadow: 0 0 3PX rgba(0, 0, 0, .5);
+  transform: translateY(-100%);
 }
 </style>
