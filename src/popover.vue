@@ -1,6 +1,6 @@
 <template>
   <div class="popover" @click.stop="handleClick">
-    <div ref="contentWrapper" class="content-wraper" v-show="visible" @click.stop>
+    <div ref="contentWrapper" class="content-wraper" v-if="visible" @click.stop>
       <slot name="content"></slot>
     </div>
     <div ref="triggerWrapper">
@@ -17,22 +17,32 @@ export default {
     }
   },
   methods: {
-    handleClick() {
-      const self = this
-      self.visible = !self.visible
-      if(self.visible) {
-        document.body.appendChild(self.$refs.contentWrapper)
-        let {width, height, left, top} = this.$refs.triggerWrapper.getBoundingClientRect()
-        console.log(width, height, left, top)
-        self.$refs.contentWrapper.style.top = top + window.scrollY + 'px'
-        self.$refs.contentWrapper.style.left = left + window.scrollX+ 'px'
-        self.$nextTick(() => {
-          let clickHandler = () => {
-            self.visible = !this.visible
-            document.removeEventListener('click', clickHandler)
-          }
-          document.addEventListener('click', clickHandler)
-        })
+    handleClick(event) {
+      if(this.$refs.triggerWrapper.contains(event.target)) {
+        this.visible = !this.visible;
+        if(this.visible) {
+          this.onShow()
+        }
+      }
+    },
+    onShow() {
+      this.$nextTick(() => {
+        this.positionContent()
+        this.listenToDocument()
+      })
+    },
+    positionContent() {
+      let {top, left} = this.$refs.triggerWrapper.getBoundingClientRect()
+      this.$refs.contentWrapper.style.top = top + window.scrollY + 'px'
+      this.$refs.contentWrapper.style.left = left + window.scrollX + 'px'
+    },
+    listenToDocument() {
+      let eventHandler = (e) => {
+        if(!this.$refs.contentWrapper.contains(e.target)) {
+          this.visible = false
+          document.removeEventListener('click', eventHandler)
+        }
+        document.addEventListener('click', eventHandler)
       }
     }
   },
