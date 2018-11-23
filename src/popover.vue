@@ -10,47 +10,48 @@
 </template>
 <script>
 export default {
-  name: 'popover',
+  name: "popover",
   data() {
     return {
-      visible: false,
-    }
+      visible: false
+    };
   },
   methods: {
     handleClick(event) {
-      if(this.$refs.triggerWrapper.contains(event.target)) {
+      if (this.$refs.triggerWrapper.contains(event.target)) {
         this.visible = !this.visible;
-        if(this.visible) {
-          this.onShow()
+        if (this.visible) {
+          // 点开了popover，即点击到按钮
+          this.onShow();
         }
       }
-    },
-    onShow() {
-      this.$nextTick(() => {
-        this.positionContent()
-        this.listenToDocument()
-      })
     },
     positionContent() {
-      let {top, left} = this.$refs.triggerWrapper.getBoundingClientRect()
-      this.$refs.contentWrapper.style.top = top + window.scrollY + 'px'
-      this.$refs.contentWrapper.style.left = left + window.scrollX + 'px'
+      document.body.appendChild(this.$refs.contentWrapper);
+      let {
+        width,
+        height,
+        left,
+        top
+      } = this.$refs.triggerWrapper.getBoundingClientRect();
+      this.$refs.contentWrapper.style.top = top + window.scrollY + "px";
+      this.$refs.contentWrapper.style.left = left + window.scrollX + "px";
     },
-    listenToDocument() {
-      let eventHandler = (e) => {
-        if(!this.$refs.contentWrapper.contains(e.target)) {
-          this.visible = false
-          document.removeEventListener('click', eventHandler)
+    listToDocument() {
+      let eventHandler = e => {
+        if (!this.$refs.contentWrapper.contains(e.target)) {
+          this.visible = false;
+          document.removeEventListener("click", eventHandler);
         }
-        document.addEventListener('click', eventHandler)
-      }
+      };
+      document.addEventListener("click", eventHandler);
+    },
+    onShow() {
+      this.positionContent();
+      this.listToDocument();
     }
-  },
-  mounted(){
-    console.log(this.$refs.contentWrapper)
-    console.log(this.$refs.triggerWrapper)
   }
-}
+};
 </script>
 <style scoped lang="scss">
 .popover {
@@ -61,7 +62,7 @@ export default {
 .content-wraper {
   position: absolute;
   border: 1px solid #bfa;
-  box-shadow: 0 0 3PX rgba(0, 0, 0, .5);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
   transform: translateY(-100%);
 }
 </style>
