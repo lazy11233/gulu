@@ -1,6 +1,7 @@
 <template>
   <button class="g-button" :class="{[`icon-${iconPosition}`]: true}">
-    <g-icon v-if="icon" :name="icon" class="icon"></g-icon>
+    <g-icon v-if="loading" class="loading icon" name="loading"></g-icon>
+    <g-icon v-if="icon && !loading" :name="icon" class="icon"></g-icon>
     <span class="content">
       <slot></slot>
     </span>
@@ -22,12 +23,23 @@
         validator(value) {
           return ['left', 'right'].includes(value);
         }
+      },
+      loading: {
+        required: false,
+        type: Boolean,
+        default: false
       }
     }
   }
 </script>
 
 <style lang="scss" scoped>
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
   .g-button {
     display: inline-flex;
     justify-content: center;
@@ -46,12 +58,15 @@
 
     &:focus { outline: none; }
 
-    > .icon { order: 1; margin-right: .3em; }
-    > .content { order: 2 }
+    > .icon { order: 0; margin-right: .3em; }
+    > .content { order: 1; }
 
     &.icon-right {
-      > .icon { order: 2; margin-right: 0; margin-left: .3em; }
-      > .content { order: 1 }
+      > .icon { order: 1; margin-right: 0; margin-left: .3em; }
+      > .content { order: 0; }
+    }
+    .loading {
+      animation: spin 1s linear infinite;
     }
   }
 </style>
