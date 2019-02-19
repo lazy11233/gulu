@@ -21,7 +21,8 @@
       --border-radius: 4px;
       --color: #333;
       --border-color: #999;
-      --border-color-hover: #666;
+      /*--border-color-hover: #666;*/
+      --border-color-hover: red;
     }
 
     #app {
@@ -38,6 +39,11 @@
   <g-button icon="setting" icon-position="left" :loading="loading1" @click="loading1 = !loading1">
     我爱js
   </g-button>
+  <g-button-group>
+    <g-button>上一页</g-button>
+    <g-button>......</g-button>
+    <g-button>下一页</g-button>
+  </g-button-group>
 </div>
 <script src="./src/app.js"></script>
 <script src="//at.alicdn.com/t/font_919452_b00hv4mtei.js"></script>
