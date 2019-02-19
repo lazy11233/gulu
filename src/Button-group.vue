@@ -6,6 +6,9 @@
 <script>
   export default {
     name: 'button-group',
+    mounted() {
+      console.log(this.$el.children);
+    }
   }
 </script>
 <style lang="scss" scoped>
