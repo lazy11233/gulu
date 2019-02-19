@@ -1,6 +1,6 @@
 <template>
   <button class="g-button" :class="{[`icon-${iconPosition}`]: true}"
-    @click="$emit('click')">
+          @click="$emit('click')">
     <g-icon v-if="loading" class="loading icon" name="loading"></g-icon>
     <g-icon v-if="icon && !loading" :name="icon" class="icon"></g-icon>
     <span class="content">
@@ -60,14 +60,15 @@
     &:focus { outline: none; }
 
     > .icon { order: 0; margin-right: .3em; }
+
     > .content { order: 1; }
 
     &.icon-right {
       > .icon { order: 1; margin-right: 0; margin-left: .3em; }
+
       > .content { order: 0; }
     }
-    .loading {
-      animation: spin 1s linear infinite;
-    }
+
+    .loading { animation: spin 1s linear infinite; }
   }
 </style>
