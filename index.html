@@ -8,10 +8,13 @@
   <title>轱辘</title>
   <style>
     * {
-      margin: 0; padding: 0; box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
+
     :root {
-      --button-height:32px;
+      --button-height: 32px;
       --font-size: 14px;
       --button-bg: white;
       --button-bg-active: #eee;
@@ -20,18 +23,34 @@
       --border-color: #999;
       --border-color-hover: #666;
     }
+
     #app {
       margin: 20px;
     }
+
     body {
       font-size: var(--font-size);
+    }
+
+    .icon {
+      height: 1em;
+      width: 1em;
     }
   </style>
 </head>
 <body>
-  <div id="app">
-    <g-button></g-button>
-  </div>
-  <script src="./src/app.js"></script>
+<div id="app">
+  <g-button icon="setting">
+    我爱js
+  </g-button>
+  <g-button icon="setting" icon-position="left">
+    我爱js
+  </g-button>
+  <g-button icon="setting" icon-position="right">
+    我爱js
+  </g-button>
+</div>
+<script src="./src/app.js"></script>
+<script src="//at.alicdn.com/t/font_919452_b00hv4mtei.js"></script>
 </body>
 </html>
