@@ -16,6 +16,9 @@ new Vue({
 });
 
 import chai from 'chai';
+import spies from 'chai-spies';
+
+chai.use(spies);
 const expect = chai.expect;
 
 //单元测试
@@ -66,7 +69,7 @@ const expect = chai.expect;
   });
   button.$mount(div);
   let svg = button.$el.querySelector('svg');
-  let { order } = window.getComputedStyle(svg)
+  let {order} = window.getComputedStyle(svg)
   expect(order).to.eq('2');
   button.$el.remove();
   button.$destroy();
@@ -81,12 +84,13 @@ const expect = chai.expect;
     }
   });
   button.$mount(div);
-  button.$on('click', function() {
-    // 期望成立的事件触发
-    expect(1).to.eq(1);
-  });
+  const spy = chai.spy(function() {})
+  button.$on('click', spy);
   let btnEle = button.$el;
   btnEle.click();
+
+  expect(spy).to.have.been.called();
+
   button.$el.remove();
   button.$destroy();
 }
