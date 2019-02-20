@@ -59,14 +59,14 @@
 
     &:focus { outline: none; }
 
-    > .icon { order: 0; margin-right: .3em; }
+    > .icon { order: 1; margin-right: .3em; }
 
-    > .content { order: 1; }
+    > .content { order: 2; }
 
     &.icon-right {
-      > .icon { order: 1; margin-right: 0; margin-left: .3em; }
+      > .icon { order: 2; margin-right: 0; margin-left: .3em; }
 
-      > .content { order: 0; }
+      > .content { order: 1; }
     }
 
     .loading { animation: spin 1s linear infinite; }
