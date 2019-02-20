@@ -23,6 +23,7 @@ const expect = chai.expect;
 
 //单元测试
 {
+  /* 测试button的icon参数 */
   const div = document.createElement('div');
   document.body.appendChild(div);
   const Constructor = Vue.extend(Button);
@@ -40,6 +41,7 @@ const expect = chai.expect;
 }
 
 {
+  /* 测试button的loading参数 */
   const div = document.createElement('div');
   document.body.appendChild(div);
   const Constructor = Vue.extend(Button);
@@ -58,6 +60,7 @@ const expect = chai.expect;
 }
 
 {
+  /* 测试iconPosition参数 */
   const div = document.createElement('div');
   document.body.appendChild(div);
   const Constructor = Vue.extend(Button);
@@ -75,6 +78,7 @@ const expect = chai.expect;
   button.$destroy();
 }
 {
+  /* 测试button的点击事件 */
   const div = document.createElement('div');
   document.body.appendChild(div);
   const Constructor = Vue.extend(Button);
