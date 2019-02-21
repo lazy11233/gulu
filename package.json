@@ -2,7 +2,7 @@
   "name": "lz-gulu",
   "version": "0.0.2",
   "description": "这是一个UI框架",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "start": "parcel --no-cache index.html",
     "dev-test": "parcel watch test/* --no-cache & karma start",
