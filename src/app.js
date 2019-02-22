@@ -13,12 +13,11 @@ Vue.component('g-input', Input);
 new Vue({
   el: '#app',
   data: {
-    loading1: false
+    loading1: false,
+    message: 1
   },
   methods: {
     handleChange(input) {
-      console.log(input);
-      console.log(1);
     }
   }
 });
