@@ -66,46 +66,18 @@ describe('Input', () => {
     afterEach(() => {
       vm.$destroy();
     });
-    it('触发 change.', () => {
-      vm = new Constructor({}).$mount();
-      const callback = sinon.fake();
-      vm.$on('change', callback);
-      // 触发 change.
-      let changEvent = new Event('change');
-      console.log(changEvent);
-      const inputElement = vm.$el.querySelector('input');
-      inputElement.dispatchEvent(changEvent);
-      expect(callback).to.have.been.calledWith(changEvent);
-    });
-    it('触发 input.', () => {
-      vm = new Constructor({}).$mount();
-      const callback = sinon.fake();
-      vm.$on('input', callback);
-      // 触发 change.
-      let event = new Event('input');
-      const inputElement = vm.$el.querySelector('input');
-      inputElement.dispatchEvent(event);
-      expect(callback).to.have.been.calledWith(event);
-    });
-    it('触发 focus.', () => {
-      vm = new Constructor({}).$mount();
-      const callback = sinon.fake();
-      vm.$on('focus', callback);
-      // 触发 change.
-      let event = new Event('focus');
-      const inputElement = vm.$el.querySelector('input');
-      inputElement.dispatchEvent(event);
-      expect(callback).to.have.been.calledWith(event);
-    });
-    it('触发 blur.', () => {
-      vm = new Constructor({}).$mount();
-      const callback = sinon.fake();
-      vm.$on('blur', callback);
-      // 触发 change.
-      let event = new Event('blur');
-      const inputElement = vm.$el.querySelector('input');
-      inputElement.dispatchEvent(event);
-      expect(callback).to.have.been.calledWith(event);
+
+    it('触发 blur / change / focus / input.', () => {
+        vm = new Constructor({}).$mount();
+      ['blur', 'change', 'focus', 'input'].forEach(eventName => {
+        const callback = sinon.fake();
+        vm.$on(eventName, callback);
+        // 触发 change.
+        let event = new Event(eventName);
+        const inputElement = vm.$el.querySelector('input');
+        inputElement.dispatchEvent(event);
+        expect(callback).to.have.been.calledWith(event);
+      });
     });
   });
 });
