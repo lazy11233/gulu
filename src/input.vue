@@ -1,9 +1,9 @@
 <template>
-  <div class="wrapper" :error="{ error }">
+  <div class="wrapper" :class="{ error }">
     <input type="text" :value="value" @input="$emit('input')" :disabled="disabled" :readonly="readonly">
     <template v-if="error">
-      <Icon name="error-circle"></Icon>
-      <span>{{ error }}</span>
+      <Icon name="error-circle" class="icon-error"></Icon>
+      <span class="error-message">{{ error }}</span>
     </template>
   </div>
 </template>
@@ -41,6 +41,7 @@
   $border-radius: 4px;
   $font-size: 14px;
   $box-shadow-color: rgba(0, 0, 0, 0.5);
+  $red: #f1354d;
 
   .wrapper {
     display: inline-flex;
@@ -48,21 +49,18 @@
     align-items: center;
     justify-content: center;
 
-    input {
+    > :not(:last-child) { margin-right: .2em; }
+    input {fa
       height: $height;
       border: 1px solid $border-color;
       border-radius: $border-radius;
-      padding: 8px;
+      padding: 0 8px;
       outline: none;
       font-size: inherit;
 
-      &:hover {
-        border-color: $border-color-hover;
-      }
+      &:hover { border-color: $border-color-hover; }
 
-      &:focus {
-        box-shadow: inset 0 1px 3px $box-shadow-color;
-      }
+      &:focus { box-shadow: inset 0 1px 3px $box-shadow-color; }
 
       &[disabled], &[readonly] {
         border-color: #bbb;
@@ -71,5 +69,13 @@
         user-select: none;
       }
     }
+
+    &.error {
+      > input { border-color: $red; }
+    }
+
+    .icon-error {fill: $red;}
+
+    .error-message {color: $red;}
   }
 </style>
