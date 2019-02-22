@@ -1,6 +1,11 @@
 <template>
   <div class="wrapper" :class="{ error }">
-    <input type="text" :value="value" @input="$emit('input')" :disabled="disabled" :readonly="readonly">
+    <input type="text" :value="value" :disabled="disabled" :readonly="readonly"
+      @change="$emit('change', $event)"
+      @input="$emit('input', $event)"
+      @focus="$emit('focus', $event)"
+      @blur="$emit('blur', $event)"
+    >
     <template v-if="error">
       <Icon name="error-circle" class="icon-error"></Icon>
       <span class="error-message">{{ error }}</span>
@@ -50,7 +55,7 @@
     justify-content: center;
 
     > :not(:last-child) { margin-right: .2em; }
-    input {fa
+    input {
       height: $height;
       border: 1px solid $border-color;
       border-radius: $border-radius;
