@@ -51,6 +51,30 @@
   <br>
   <g-input value="王二" error="输入的名字太短"></g-input>
   <g-input value="麻子" @change="handleChange"></g-input>
+  <br>
+
+  <g-row>
+    <g-col>1</g-col>
+    <g-col>2</g-col>
+  </g-row>
+
+  <g-row>
+    <g-col>1</g-col>
+    <g-col>2</g-col>
+    <g-col>3</g-col>
+  </g-row>
+
+  <g-row>
+    <g-col>1</g-col>
+    <g-col>2</g-col>
+    <g-col>3</g-col>
+    <g-col>4</g-col>
+  </g-row>
+
+  <g-row>
+    <g-col :span="2"></g-col>
+    <g-col :span="12"></g-col>
+  </g-row>
 </div>
 <div id="test"></div>
 <script src="./src/app.js"></script>
